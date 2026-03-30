@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Qazaq Songkorpus - Презентация</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0f172a; /* Tailwind slate-900 */
+            color: #f8fafc; /* Tailwind slate-50 */
+            overflow: hidden; /* Prevent scrolling, act like a true presentation */
+        }
+        
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+            pointer-events: none;
+            padding: 2rem;
+            box-sizing: border-box;
+            transform: scale(0.95);
+        }
+        
+        .slide.active {
+            opacity: 1;
+            pointer-events: auto;
+            transform: scale(1);
+            z-index: 10;
+        }
+
+        .slide-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        /* Glassmorphism card effect for content */
+        .glass-card {
+            background: rgba(30, 41, 59, 0.7); /* slate-800 with opacity */
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 1.5rem;
+            padding: 3rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Progress bar */
+        #progress-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            z-index: 50;
+        }
+
+        #progress-bar {
+            height: 100%;
+            background: #3b82f6; /* blue-500 */
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        /* Controls */
+        .controls {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 1rem;
+            z-index: 50;
+        }
+
+        .control-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: white;
+            width: 3rem;
+            height: 3rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            backdrop-filter: blur(5px);
+        }
+
+        .control-btn:hover {
+            background: rgba(59, 130, 246, 0.8); /* blue hover */
+            transform: scale(1.1);
+        }
+
+        .control-btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Gradient Text */
+        .text-gradient {
+            background: linear-gradient(to right, #60a5fa, #a78bfa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="progress-container">
+        <div id="progress-bar"></div>
+    </div>
+
+    <div id="presentation">
+        <!-- Slide 1: Title -->
+        <div class="slide active">
+            <div class="slide-content text-center">
+                <div class="glass-card">
+                    <i class="fas fa-music text-6xl text-blue-400 mb-6"></i>
+                    <h1 class="text-5xl md:text-7xl font-bold mb-6 text-gradient">Qazaq Songkorpus</h1>
+                    <p class="text-xl md:text-2xl text-slate-300 font-light mb-8">Қазақ ән мәтіндерінің көпқабатты аннотацияланған эмпирикалық базасы</p>
+                    <div class="inline-block px-6 py-2 rounded-full border border-blue-500 text-blue-400 text-sm tracking-widest uppercase">
+                        Инновациялық лингвистикалық жоба
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 2: Problem -->
+        <div class="slide">
+            <div class="slide-content">
+                <div class="glass-card">
+                    <div class="flex items-center mb-8">
+                        <i class="fas fa-exclamation-circle text-4xl text-blue-400 mr-4"></i>
+                        <h2 class="text-4xl font-bold">Проблема және Өзектілік</h2>
+                    </div>
+                    <ul class="space-y-6 text-xl text-slate-300">
+                        <li class="flex items-start">
+                            <i class="fas fa-chevron-right text-blue-500 mt-1 mr-4"></i>
+                            <span><b>Жылдам трансформация:</b> Қазақ музыка индустриясы дәстүрлі эстрададан Q-pop пен заманауи хип-хопқа дейін үлкен өзгерістерді бастан өткерді.</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-chevron-right text-blue-500 mt-1 mr-4"></i>
+                            <span><b>Зерттелмеген құбылыстар:</b> Ән мәтіндеріндегі жаңа жаргондар, неологизмдер, грамматикалық ауытқулар лингвистикалық тұрғыдан жүйелі зерттелмеген.</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-chevron-right text-blue-500 mt-1 mr-4"></i>
+                            <span><b>Деректер тапшылығы:</b> Машиналық оқыту (AI) мен ғылыми талдаулар үшін сенімді, аннотацияланған қазақтілді эмпирикалық база жоқ.</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3: Goal -->
+        <div class="slide">
+            <div class="slide-content">
+                <div class="glass-card border-purple-500/30">
+                    <div class="flex items-center mb-8">
+                        <i class="fas fa-bullseye text-4xl text-purple-400 mr-4"></i>
+                        <h2 class="text-4xl font-bold">Жоба мақсаты</h2>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-slate-800/50 p-6 rounded-xl border border-slate-700">
+                            <i class="fas fa-database text-3xl text-purple-400 mb-4"></i>
+                            <h3 class="text-xl font-semibold mb-2 text-white">Жинақтау</h3>
+                            <p class="text-slate-400">Барлық жанрдағы қазақстандық ән мәтіндерінің цифрлық архивін құру.</p>
+                        </div>
+                        <div class="bg-slate-800/50 p-6 rounded-xl border border-slate-700">
+                            <i class="fas fa-layer-group text-3xl text-purple-400 mb-4"></i>
+                            <h3 class="text-xl font-semibold mb-2 text-white">Құрылымдау</h3>
+                            <p class="text-slate-400">Дүниежүзілік TEI P5 стандартымен (шумақ, тармақ) форматтау.</p>
+                        </div>
+                        <div class="bg-slate-800/50 p-6 rounded-xl border border-slate-700">
+                            <i class="fas fa-robot text-3xl text-purple-400 mb-4"></i>
+                            <h3 class="text-xl font-semibold mb-2 text-white">Автоматтандыру</h3>
+                            <p class="text-slate-400">NLP және Машиналық оқыту арқылы мәтіндерді автоматты аннотациялау.</p>
+                        </div>
+                        <div class="bg-slate-800/50 p-6 rounded-xl border border-slate-700">
+                            <i class="fas fa-globe text-3xl text-purple-400 mb-4"></i>
+                            <h3 class="text-xl font-semibold mb-2 text-white">Ашықтық</h3>
+                            <p class="text-slate-400">Ғалымдарға арналған ашық архитектуралы веб-платформа жасау.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4: Architecture -->
+        <div class="slide">
+            <div class="slide-content">
+                <div class="glass-card">
+                    <div class="flex items-center mb-8">
+                        <i class="fas fa-folder-tree text-4xl text-blue-400 mr-4"></i>
+                        <h2 class="text-4xl font-bold">Корпус архитектурасы (Архивтер)</h2>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="flex items-center p-4 bg-slate-800/60 rounded-lg border-l-4 border-blue-500">
+                            <div class="w-16 h-16 rounded-full bg-blue-900/50 flex items-center justify-center mr-6 shrink-0">
+                                <span class="text-2xl">1</span>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-white mb-1">Дәстүрлі эстрада (1990-2010)</h3>
+                                <p class="text-slate-400">Классикалық поэзияға жақын синтаксис, лексикалық тазалық, TTR көрсеткіші жоғары.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center p-4 bg-slate-800/60 rounded-lg border-l-4 border-purple-500">
+                            <div class="w-16 h-16 rounded-full bg-purple-900/50 flex items-center justify-center mr-6 shrink-0">
+                                <span class="text-2xl">2</span>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-white mb-1">Q-Pop және Инди (2015-тен бастап)</h3>
+                                <p class="text-slate-400">Код ауыстыру (Code-switching), ағылшын-орыс кірме сөздері, жаңа синтаксистік құрылымдар.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center p-4 bg-slate-800/60 rounded-lg border-l-4 border-pink-500">
+                            <div class="w-16 h-16 rounded-full bg-pink-900/50 flex items-center justify-center mr-6 shrink-0">
+                                <span class="text-2xl">3</span>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-white mb-1">Хип-хоп / Рэп</h3>
+                                <p class="text-slate-400">Бейресми лексика (сленг), күрделі ұйқас схемалары, әлеуметтік тақырыптар, агрессивті ырғақ.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5: Tech Stack -->
+        <div class="slide">
+            <div class="slide-content">
+                <div class="glass-card">
+                    <div class="flex items-center mb-8">
+                        <i class="fas fa-microchip text-4xl text-blue-400 mr-4"></i>
+                        <h2 class="text-4xl font-bold">Технологиялық Стек</h2>
+                    </div>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+                        <div class="p-6 bg-slate-800/40 rounded-xl hover:bg-slate-700/50 transition duration-300">
+                            <i class="fab fa-python text-5xl text-yellow-400 mb-4"></i>
+                            <h3 class="font-bold mb-2">Жинау (Scraping)</h3>
+                            <p class="text-sm text-slate-400">Python, BeautifulSoup, C++ токенизаторлары</p>
+                        </div>
+                        <div class="p-6 bg-slate-800/40 rounded-xl hover:bg-slate-700/50 transition duration-300">
+                            <i class="fas fa-brain text-5xl text-blue-400 mb-4"></i>
+                            <h3 class="font-bold mb-2">NLP Модельдеу</h3>
+                            <p class="text-sm text-slate-400">KazRoBERTa, Transformer (POS, NER)</p>
+                        </div>
+                        <div class="p-6 bg-slate-800/40 rounded-xl hover:bg-slate-700/50 transition duration-300">
+                            <i class="fas fa-database text-5xl text-green-400 mb-4"></i>
+                            <h3 class="font-bold mb-2">Сақтау</h3>
+                            <p class="text-sm text-slate-400">XML (TEI P5), Vector DB (Pinecone)</p>
+                        </div>
+                        <div class="p-6 bg-slate-800/40 rounded-xl hover:bg-slate-700/50 transition duration-300">
+                            <i class="fab fa-react text-5xl text-cyan-400 mb-4"></i>
+                            <h3 class="font-bold mb-2">Веб Интерфейс</h3>
+                            <p class="text-sm text-slate-400">React.js, Tailwind, Интерактивті графиктер</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 6: Linguistic features -->
+        <div class="slide">
+            <div class="slide-content">
+                <div class="glass-card">
+                    <div class="flex items-center mb-8">
+                        <i class="fas fa-language text-4xl text-blue-400 mr-4"></i>
+                        <h2 class="text-4xl font-bold">Қазақ тілінің спецификасы</h2>
+                    </div>
+                    <div class="flex flex-col space-y-6">
+                        <div class="flex">
+                            <div class="mt-1 mr-4 text-blue-400"><i class="fas fa-project-diagram text-2xl"></i></div>
+                            <div>
+                                <h3 class="text-xl font-bold mb-1">Агглютинативті морфология</h3>
+                                <p class="text-slate-300">Күрделі етістіктерді (мыс: <i>бара-жатыр-мын</i>) біртұтас лемма ретінде қарастырып, түбір мен қосымшаларды автоматты ажырату қабаты.</p>
+                            </div>
+                        </div>
+                        <div class="flex">
+                            <div class="mt-1 mr-4 text-purple-400"><i class="fas fa-magic text-2xl"></i></div>
+                            <div>
+                                <h3 class="text-xl font-bold mb-1">Сөзжасам және Неологизмдер</h3>
+                                <p class="text-slate-300">Екі тілдің бірігуінен туған формаларды, сленгтер мен портманто сөздерді тануға арналған арнайы аннотация қабаты.</p>
+                            </div>
+                        </div>
+                        <div class="flex">
+                            <div class="mt-1 mr-4 text-pink-400"><i class="fas fa-heartbeat text-2xl"></i></div>
+                            <div>
+                                <h3 class="text-xl font-bold mb-1">Сентимент-талдау</h3>
+                                <p class="text-slate-300">Мәтіндердің эмоционалдық бояуын (позитивті, мұңды, агрессивті) бағалау арқылы қоғамдағы көңіл-күй өзгерістерін визуалдау.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 7: Legal -->
+        <div class="slide">
+            <div class="slide-content">
+                <div class="glass-card border-red-500/30">
+                    <div class="flex items-center mb-8">
+                        <i class="fas fa-balance-scale text-4xl text-red-400 mr-4"></i>
+                        <h2 class="text-4xl font-bold">Заңдық және Этикалық мәселелер</h2>
+                    </div>
+                    <div class="bg-slate-800/50 p-6 rounded-xl">
+                        <ul class="space-y-4 text-lg text-slate-300">
+                            <li class="flex items-center"><i class="fas fa-check-circle text-green-400 mr-3"></i> <b>Fair Use:</b> Жоба тек коммерциялық емес ғылыми-зерттеу мақсатында жүзеге асады.</li>
+                            <li class="flex items-center"><i class="fas fa-check-circle text-green-400 mr-3"></i> <b>Bag-of-Words форматы:</b> Авторлық құқықты бұзбау үшін көпшілікке толық мәтін емес, тек жиілік статистикасы ұсынылады.</li>
+                            <li class="flex items-center"><i class="fas fa-check-circle text-green-400 mr-3"></i> <b>Ынтымақтастық:</b> Қазақстанның авторлар қоғамымен және музыкалық лейблдермен меморандумдар жасасу.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 8: Conclusion -->
+        <div class="slide">
+            <div class="slide-content text-center">
+                <div class="glass-card">
+                    <i class="fas fa-rocket text-6xl text-blue-400 mb-6"></i>
+                    <h2 class="text-4xl font-bold mb-6">Болашағы және Қорытынды</h2>
+                    <p class="text-xl text-slate-300 mb-8 max-w-2xl mx-auto">
+                        «Qazaq Songkorpus» қазақ тіліндегі компьютерлік лингвистиканың дамуына үлкен үлес қосатын бірегей платформа болады. Ол лингвистерге, мәдениеттанушыларға және AI зерттеушілеріне арналған баға жетпес құралға айналады.
+                    </p>
+                    <div class="text-blue-400 font-semibold text-2xl animate-pulse">
+                        Назарларыңызға рақмет!
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Controls -->
+    <div class="controls">
+        <button id="prevBtn" class="control-btn" aria-label="Алдыңғы слайд"><i class="fas fa-arrow-left"></i></button>
+        <button id="nextBtn" class="control-btn" aria-label="Келесі слайд"><i class="fas fa-arrow-right"></i></button>
+    </div>
+
+    <script>
+        const slides = document.querySelectorAll('.slide');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const progressBar = document.getElementById('progress-bar');
+        
+        let currentSlide = 0;
+
+        function updateSlides() {
+            slides.forEach((slide, index) => {
+                if (index === currentSlide) {
+                    slide.classList.add('active');
+                } else {
+                    slide.classList.remove('active');
+                }
+            });
+
+            // Update buttons
+            prevBtn.disabled = currentSlide === 0;
+            nextBtn.disabled = currentSlide === slides.length - 1;
+
+            // Update progress bar
+            const progress = (currentSlide / (slides.length - 1)) * 100;
+            progressBar.style.width = `${progress}%`;
+        }
+
+        function nextSlide() {
+            if (currentSlide < slides.length - 1) {
+                currentSlide++;
+                updateSlides();
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlide > 0) {
+                currentSlide--;
+                updateSlides();
+            }
+        }
+
+        // Event Listeners for buttons
+        nextBtn.addEventListener('click', nextSlide);
+        prevBtn.addEventListener('click', prevSlide);
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === 'Space') {
+                nextSlide();
+            } else if (e.key === 'ArrowLeft') {
+                prevSlide();
+            }
+        });
+
+        // Touch Swipe functionality
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        document.addEventListener('touchstart', e => {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+
+        document.addEventListener('touchend', e => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        });
+
+        function handleSwipe() {
+            const threshold = 50;
+            if (touchEndX < touchStartX - threshold) {
+                nextSlide(); // Swiped left
+            }
+            if (touchEndX > touchStartX + threshold) {
+                prevSlide(); // Swiped right
+            }
+        }
+
+        // Initialize
+        updateSlides();
+    </script>
+</body>
+</html>
